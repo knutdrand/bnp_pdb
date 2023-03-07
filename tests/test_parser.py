@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
-from numpy.testing import assert_equal, assert_allclose
-from bnp_pdb.bnp_pdb import parse_file, PDB
-
+from numpy.testing import (assert_equal, assert_allclose)
+from bnp_pdb.bnp_pdb import parse_file, PDB, read
+from bnp_pdb.distance import distance_matrix
 
 @pytest.fixture
 def lines():
@@ -37,6 +37,11 @@ HETATM  132  OXT ACY   401       4.306  23.101  12.291  1.00 21.19           O
 '''.split('\n')
 
 
+@pytest.fixture
+def pdb():
+    return PDB.from_atoms(read('example_data/10gs.cif.pdb'))
+
+
 def test_parser(lines):
     d = parse_file(lines)
     assert_equal(d.atom_number, np.arange(1, 6))
@@ -45,3 +50,8 @@ def test_parser(lines):
 def test_pdb(lines):
     pdb = PDB.from_atoms(parse_file(lines))
     assert_equal(pdb.chains['A'].atom_number, np.arange(1, 6))
+
+
+def test_distance_matrix(pdb):
+    D = distance_matrix(pdb.chains['A'], pdb.chains['B'])
+    assert D.shape == (len(pdb.chains['A']), len(pdb.chains['B']))
