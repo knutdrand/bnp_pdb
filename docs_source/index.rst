@@ -1,11 +1,13 @@
 Welcome to BioNumPy PDB's documentation!
 ======================================
 
+.. include:: installation.rst
+.. include:: usage.rst
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   readme
    installation
    usage
    modules

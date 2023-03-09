@@ -31,17 +31,47 @@ def read(filename):
 
 
 class PDB:
+    ''' Class to hold data from a PDB file '''
     def __init__(self, atoms: Atom):
         self._chains = dict(bnp.groupby(atoms, 'chain'))
 
     @property
     def chains(self) -> dict[str, Atom]:
+        """Dict containing the atoms of each chain in the pdb file
+
+        Returns
+        -------
+        dict[str, Atom]
+        """
         return self._chains
 
     @classmethod
-    def from_atoms(cls, atoms: Atom):
+    def from_atoms(cls, atoms: Atom) -> 'PDB':
+        """Create a PDB object from a set of atoms
+
+        Parameters
+        ----------
+        atoms : Atom
+
+        Returns
+        -------
+        'PDB'
+        """
+        
         return cls(atoms)
 
     @classmethod
-    def from_file(cls, filename: str):
+    def from_file(cls, filename: str) -> 'PDB':
+        """Create a PDB object from a pdb file
+
+        Parameters
+        ----------
+        cls :
+        filename : str
+
+        Returns
+        -------
+        'PDB'
+        """
+        
         return cls.from_atoms(read(filename))
