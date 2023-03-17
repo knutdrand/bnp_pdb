@@ -8,7 +8,7 @@ from .atom import Atom
 def parse_file(file_obj):
     atom_lines = (line.strip() for line in file_obj if line.startswith('ATOM'))
     types = [field.type for field in dataclasses.fields(Atom)]
-    args = zip(*((t(p) for t, p in zip(types, line.split()[1:12])) for line in atom_lines))
+    args = list(zip(*((t(p) for t, p in zip(types, line.split()[1:12])) for line in atom_lines)))
     return Atom(*[list(a) for a in args])
 
 

@@ -62,4 +62,3 @@ def test_distance_table(pdb):
     l2 = len(pdb.chains['B'])
     d = distance_table(pdb.chains['A'], pdb.chains['B'])
     assert len(d) == l1*l2
-    

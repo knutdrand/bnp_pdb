@@ -22,7 +22,7 @@ def distance_matrix(point_a, point_b):
                    (point_a.z-point_b.z[:, None])**2)
 
 
-def distance_table(atom_a: Atom, atom_b: Atom, max_distance=np.inf):
+def distance_table(atom_a: Atom, atom_b: Atom):
     x_idx, y_idx = np.mgrid[0:len(atom_a), 0:len(atom_b)]
     a = atom_a[x_idx.ravel()]
     b = atom_b[y_idx.ravel()]
