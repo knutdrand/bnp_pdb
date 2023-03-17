@@ -2,20 +2,7 @@
 from bionumpy.bnpdataclass import bnpdataclass
 import bionumpy as bnp
 import dataclasses
-
-@bnpdataclass
-class Atom:
-    atom_number: int
-    atom: str
-    residue: str
-    chain: str
-    residue_number: int
-    x: float
-    y: float
-    z: float
-    occupancy: float
-    temperature_factor: float
-    element_name: str
+from .atom import Atom
 
 
 def parse_file(file_obj):

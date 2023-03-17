@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 from numpy.testing import (assert_equal, assert_allclose)
 from bnp_pdb.bnp_pdb import parse_file, PDB, read
-from bnp_pdb.distance import distance_matrix
+from bnp_pdb.distance import distance_matrix, distance_table
 
 @pytest.fixture
 def lines():
@@ -55,3 +55,11 @@ def test_pdb(lines):
 def test_distance_matrix(pdb):
     D = distance_matrix(pdb.chains['A'], pdb.chains['B'])
     assert D.shape == (len(pdb.chains['A']), len(pdb.chains['B']))
+
+
+def test_distance_table(pdb):
+    l1 = len(pdb.chains['A'])
+    l2 = len(pdb.chains['B'])
+    d = distance_table(pdb.chains['A'], pdb.chains['B'])
+    assert len(d) == l1*l2
+    
